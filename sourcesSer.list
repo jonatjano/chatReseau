@@ -1,1 +1,6 @@
-src/serveur/Serveur.java
+src/serveur/Server.java
+src/serveur/ihm/IHM.java
+src/serveur/ihm/IHMConsol.java
+src/serveur/job/AcceptClient.java
+src/serveur/job/Client.java
+src/serveur/job/GerantDeClient.java

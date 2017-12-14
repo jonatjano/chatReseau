@@ -1,2 +1,2 @@
--d ./bin/server
+-d ./bin
 -encoding "UTF-8"
