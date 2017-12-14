@@ -45,6 +45,8 @@ public class AcceptClient implements Runnable
 	public void deconnection(GerantDeClient gdc)
 	{
 		String name = gdc.getName();
+		if (name == null)
+			return;
 		
 		for ( GerantDeClient gdcTemp : listGerantClient)
 			this.sendInfo( gdcTemp, "--> déconnection : " + name + " ");
