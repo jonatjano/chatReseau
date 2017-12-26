@@ -47,14 +47,10 @@ public class GerantDeClient implements Runnable
 			String name;
 			do
 			{
-				boolean err = false;
-				if (err)
-					client.sendMsg("nom invalide !");
-				
-				client.sendMsg("Entrer votre nom : ");
+				accClient.sendInfo(this, AcceptClient.NAME_REQUEST_CLIENT, null);
 				name = client.receiveMsg();
 				
-			} while ( ! client.setName(name));
+			} while ( accClient.nameIsUsed(name)  || !client.setName(name));
 			
 			this.accClient.connection(this);
 		}

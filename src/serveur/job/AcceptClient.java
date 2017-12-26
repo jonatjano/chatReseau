@@ -11,6 +11,10 @@ import java.lang.Runtime;
 
 public class AcceptClient implements Runnable
 {
+	public static final String NAME_REQUEST_CLIENT   = "NAME_REQUEST";
+	public static final String RECEIVE_MESSAGE   = "NORMAL_MESSAGE";
+	public static final String DISCONNECT_CLIENT = "DISCONNECTED";
+	public static final String CONNECT_CLIENT = "CONNECTED";
 	
 	private ServerSocket serverSock;
 	private Server serv;
@@ -25,15 +29,19 @@ public class AcceptClient implements Runnable
 		this.listThreadGerantClient = new ArrayList<Thread>();
 	}
 	
-	private void sendInfo(GerantDeClient gdc, String s)
+	void sendInfo(GerantDeClient gdc, String type, String s)
 	{
-		gdc.sendMsg( s);
+		String sSend = type + ":";
+		if (s != null)
+			sSend += s;
+		
+		gdc.sendMsg(s);
 	}
 	
 	public void messageReceive(String s, GerantDeClient  gdc)
 	{
 		for ( GerantDeClient gdcTemp : listGerantClient)
-			this.sendInfo( gdcTemp, gdc.getName() + " : " + s);
+			this.sendInfo( gdcTemp, AcceptClient.RECEIVE_MESSAGE , gdc.getName() + ":" + s);
 	}
 	
 	public void connection(GerantDeClient gdc)
@@ -41,7 +49,7 @@ public class AcceptClient implements Runnable
 		serv.getIHM().pMessage(IHM.NEW_CLIENT_MESSAGE, gdc.getName());
 		
 		for ( GerantDeClient gdcTemp : listGerantClient)
-			this.sendInfo( gdcTemp, "--> connection : " + gdc.getName() + " ");
+			this.sendInfo( gdcTemp, AcceptClient.CONNECT_CLIENT, gdc.getName());
 	}
 	
 	public void deconnection(GerantDeClient gdc)
@@ -53,7 +61,19 @@ public class AcceptClient implements Runnable
 		serv.getIHM().pMessage(IHM.QUIT_CLIENT_MESSAGE,name);
 		
 		for ( GerantDeClient gdcTemp : listGerantClient)
-			this.sendInfo( gdcTemp, "--> déconnection : " + name + " ");
+			this.sendInfo( gdcTemp, AcceptClient.DISCONNECT_CLIENT, name);
+	}
+	
+	public boolean nameIsUsed(String name)
+	{
+		if (name == null)
+			return true;
+		
+		for (GerantDeClient gdc : listGerantClient)
+			if (gdc.getName().equals(name))
+				return true;
+		
+		return false;
 	}
 	
 	public void remove(GerantDeClient  gdc)
