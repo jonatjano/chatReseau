@@ -48,14 +48,14 @@ enum Command
 		String sSend = "Voici la liste des Commandes :";
 		
 		for (Command command : Command.values())
-			sSend += "\n\t" + command.name + " : " + command.descCourt + "";
+			sSend += "\\n\\t" + command.name + " : " + command.descCourt + "";
 		
 		accCli.sendInfo(gdc, AcceptClient.NORMAL_COMMAND_TYPE, sSend);
 	}
 	
 	static void error(GerantDeClient gdc)
 	{
-		String sSend = "Commande invalide !\n" +
+		String sSend = "Commande invalide !\\n" +
 					   "Faite /help pour la liste des commandes.";
 		
 		accCli.sendInfo(gdc, AcceptClient.ERROR_COMMAND_TYPE, sSend);

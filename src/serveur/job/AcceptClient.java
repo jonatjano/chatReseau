@@ -47,9 +47,12 @@ public class AcceptClient implements Runnable
 	public void messageReceive(String s, GerantDeClient  gdc)
 	{
 		if (!s.startsWith("/"))
+		{
 			for ( GerantDeClient gdcTemp : listGerantClient)
 				this.sendInfo( gdcTemp, AcceptClient.RECEIVE_MESSAGE , gdc.getName() + ":" + s);
-		
+			
+			return;
+		}
 		if (s.length() <=  1)
 			return;
 		
@@ -58,9 +61,6 @@ public class AcceptClient implements Runnable
 	
 	private void CommandExec(String commandString, GerantDeClient gdc)
 	{
-		if (commandString.length() <= 1)
-			return;
-		
 		String commandName = commandString;
 		int indSpace = commandString.indexOf(" ");
 		if (indSpace != -1)

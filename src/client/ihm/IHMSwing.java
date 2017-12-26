@@ -52,7 +52,7 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 
 	public void printMessage(String message)
 	{
-		recepField.append("\n\n\n\n" + message);
+		recepField.append("\n" + message);
 	}
 
 	public String askPseudo()

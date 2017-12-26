@@ -76,6 +76,7 @@ public class Server
 
 			String line;
 			line = reader.readLine();
+			
 			do
 			{
 				if (!line.equals(""))
@@ -83,6 +84,8 @@ public class Server
 					String[] sLine = line.split(":");
 					config.put(sLine[0], sLine[1]);
 				}
+				
+				line = reader.readLine();
 			} while (line != null);
 		}
 		catch (Exception e)
@@ -93,7 +96,7 @@ public class Server
 
 	public static void main(String[] arg)
 	{
-		readConfig("config");
+		readConfig("../config");
 
 		IHM ihm;
 		switch (config.get("defaultIHM"))
@@ -123,7 +126,7 @@ public class Server
 		{
 			try
 			{
-				port = Integer.parseInt(arg[1]);
+				port = Integer.parseInt(arg[0]);
 			}
 			catch(Exception e)
 			{
