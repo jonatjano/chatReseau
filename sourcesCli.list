@@ -1,5 +1,6 @@
 src/client/ihm/IHM.java
 src/client/ihm/IHMCui.java
+src/client/ihm/IHMSwing.java
 src/client/job/MessageHandler.java
 src/client/job/MessageWriter.java
 src/client/job/MessageReceiver.java

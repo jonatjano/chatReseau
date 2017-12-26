@@ -2,9 +2,19 @@ package client.ihm;
 
 import client.Client;
 
-public interface IHM
+public abstract class IHM
 {
-	public boolean setClient(Client client);
+	protected Client client;
+
+	public boolean setClient(Client client)
+	{
+		if (this.client == null)
+		{
+			this.client = client;
+			return true;
+		}
+		return false;
+	}
 
 	public abstract void printMessage(String message);
 

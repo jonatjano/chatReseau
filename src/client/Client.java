@@ -11,6 +11,7 @@ import client.job.MessageHandler;
 
 import client.ihm.IHM;
 import client.ihm.IHMCui;
+import client.ihm.IHMSwing;
 
 /**
  * @author Jonathan Selle, Adam Bernouy
@@ -121,7 +122,7 @@ public class Client
 	 */
 	public static void main(String[] args)
 	{
-		ihm = new IHMCui();
+		ihm = new IHMSwing();
 
 		String ip = DEFAULT_IP;
 		int port = DEFAULT_PORT;
