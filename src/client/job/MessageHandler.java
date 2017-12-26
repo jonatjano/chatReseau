@@ -28,17 +28,17 @@ public class MessageHandler
 		switch (messageType)
 		{
 			case NAME_REQUEST:
-				this.client.getIhm().askPseudo();
-			break;
+				this.client.getMessageWriter().sendMessage(this.client.getIhm().askPseudo());
+				break;
 			case NORMAL_MESSAGE:
 				this.client.getIhm().printMessage(messageBody.substring(0, messageBody.indexOf(":")) + " : " + messageBody.substring(messageBody.indexOf(":") + 1));
-			break;
+				break;
 			case DISCONNECT:
 				this.client.getIhm().printMessage("Deconnexion de : " + messageBody);
-			break;
+				break;
 			case CONNECT:
 				this.client.getIhm().printMessage("Connexion de : " + messageBody);
-			break;
+				break;
 		}
 
 		// this.client.getIhm().printMessage(message);

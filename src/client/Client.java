@@ -78,7 +78,7 @@ public class Client
 			threadReceiver = new Thread(msgReceiver);
 			threadReceiver.start();
 
-			msgWriter.sendMessage(ihm.askPseudo());
+			//msgWriter.sendMessage(ihm.askPseudo());
 		}
 		catch (ConnectException myException) {
 			System.out.println("connection refusée");
