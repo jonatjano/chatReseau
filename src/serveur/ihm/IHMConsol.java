@@ -21,6 +21,10 @@ public class IHMConsol extends IHM
 	{
 		switch (numMsg)
 		{
+			case IHM.SERVER_INFO:
+				System.out.println("--> Serveur ouvert sur l'ip \"" + s.split(":")[0] + "\" et le port " + s.split(":")[1]);
+				break;
+			
 			case IHM.NORMAL_MESSAGE:
 				System.out.println(s);
 				break;
@@ -32,7 +36,7 @@ public class IHMConsol extends IHM
 			case IHM.QUIT_CLIENT_MESSAGE:
 				System.out.println("--> déconnection : " + s);
 				break;
-			
+				
 			default:
 				System.out.println("type de message inconnue");
 				break;
