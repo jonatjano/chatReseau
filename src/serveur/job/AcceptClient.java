@@ -3,6 +3,7 @@ package server.job;
 import java.net.ServerSocket;
 import java.net.Socket;
 import server.Server;
+import server.ihm.IHM;
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Runtime;
@@ -37,7 +38,8 @@ public class AcceptClient implements Runnable
 	
 	public void connection(GerantDeClient gdc)
 	{
-		System.out.println("nouveau client");
+		serv.getIHM().pMessage(IHM.NEW_CLIENT_MESSAGE, gdc.getName());
+		
 		for ( GerantDeClient gdcTemp : listGerantClient)
 			this.sendInfo( gdcTemp, "--> connection : " + gdc.getName() + " ");
 	}
@@ -47,6 +49,8 @@ public class AcceptClient implements Runnable
 		String name = gdc.getName();
 		if (name == null)
 			return;
+		
+		serv.getIHM().pMessage(IHM.QUIT_CLIENT_MESSAGE,name);
 		
 		for ( GerantDeClient gdcTemp : listGerantClient)
 			this.sendInfo( gdcTemp, "--> déconnection : " + name + " ");

@@ -16,6 +16,11 @@ public class Server
 	private Thread thAccCli;
 	private IHM ihm;
 	
+	public IHM getIHM()
+	{
+		return this.ihm;
+	}
+	
 	public Server(IHM ihm)
 	{
 		this(Server.DEFAULT_PORT, ihm);
