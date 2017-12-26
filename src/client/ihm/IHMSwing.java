@@ -61,10 +61,11 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 		do
 		{
 			s = (String)JOptionPane.showInputDialog(
-                frame,
-                "Veuillez entrer votre pseudo:\n",
-                "Votre pseudo",
-                JOptionPane.PLAIN_MESSAGE);
+	                frame,
+	                "Veuillez entrer votre pseudo:\n",
+	                "Votre pseudo",
+	                JOptionPane.PLAIN_MESSAGE
+				);
 		} while ((s == null) || (s.length() == 0));
 		return s;
 	}
@@ -86,19 +87,16 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 
 	public void keyPressed(KeyEvent e)
 	{
-		System.out.println("c");
 		// TODO
 	}
 
 	public void keyReleased(KeyEvent e)
 	{
-		System.out.println("d");
 		// TODO
 	}
 
 	public void keyTyped(KeyEvent e)
 	{
-		System.out.println("e");
 		// TODO
 	}
 }
