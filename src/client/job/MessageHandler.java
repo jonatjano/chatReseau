@@ -22,33 +22,25 @@ public class MessageHandler
 
 	void onMessage(String message)
 	{
-		// String messageType = message.substring(0, message.indexOf(":"));
-		// System.out.println(messageType);
-		// String messageBody = message.substring(message.indexOf(":"));
-		//
-		// switch (messageType)
-		// {
-		// 	case NAME_REQUEST:
-		// 		this.client.getIhm().askPseudo();
-		// 	break;
-		// 	case NORMAL_MESSAGE:
-		// 		this.client.getIhm().printMessage(messageBody);
-		// 	break;
-		// 	case DISCONNECT:
-		// 		this.client.getIhm().printMessage("Deconnexion de : " + messageBody);
-		// 	break;
-		// 	case CONNECT:
-		// 		this.client.getIhm().printMessage("Connexion de : " + messageBody);
-		// 	break;
-		// }
+		String messageType = message.substring(0, message.indexOf(":"));
+		String messageBody = message.substring(message.indexOf(":") + 1);
 
-		this.client.getIhm().printMessage(message);
+		switch (messageType)
+		{
+			case NAME_REQUEST:
+				this.client.getIhm().askPseudo();
+			break;
+			case NORMAL_MESSAGE:
+				this.client.getIhm().printMessage(messageBody.substring(0, messageBody.indexOf(":")) + " : " + messageBody.substring(messageBody.indexOf(":") + 1));
+			break;
+			case DISCONNECT:
+				this.client.getIhm().printMessage("Deconnexion de : " + messageBody);
+			break;
+			case CONNECT:
+				this.client.getIhm().printMessage("Connexion de : " + messageBody);
+			break;
+		}
 
-		/*
-NAME_REQUEST:
-NORMAL_MESSAGE:NOM:msg
-DISCONNECTED:NOM
-CONNECTED:NOM
-		 */
+		// this.client.getIhm().printMessage(message);
 	}
 }

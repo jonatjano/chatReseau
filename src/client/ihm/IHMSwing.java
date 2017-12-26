@@ -72,10 +72,8 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 
 	public void actionPerformed(ActionEvent e)
 	{
-		System.out.println("a");
 		if (e.getSource() == sendButton)
 		{
-			System.out.println("b");
 			String message = sendField.getText().replaceAll("[ \t\n]", "");
 			if (!message.equals(""))
 			{
@@ -87,7 +85,16 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 
 	public void keyPressed(KeyEvent e)
 	{
-		// TODO
+		if (e.getKeyCode() == KeyEvent.VK_ENTER)
+		{
+			ActionEvent event;
+			long when;
+
+			when  = System.currentTimeMillis();
+			event = new ActionEvent(sendButton, ActionEvent.ACTION_PERFORMED, "Anything", when, 0);
+
+			actionPerformed(event);
+		}
 	}
 
 	public void keyReleased(KeyEvent e)
