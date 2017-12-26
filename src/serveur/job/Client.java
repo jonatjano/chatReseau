@@ -60,9 +60,9 @@ public class Client
 		if (this.name != null)
 			return false;
 		
-		if (!this.name.matches(Client.REG_NAME_CLIENT))
+		if (!name.matches(Client.REG_NAME_CLIENT))
 			return false;
-	
+		
 		this.name = name;
 		return true;
 	}

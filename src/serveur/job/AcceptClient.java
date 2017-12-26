@@ -35,7 +35,7 @@ public class AcceptClient implements Runnable
 		if (s != null)
 			sSend += s;
 		
-		gdc.sendMsg(s);
+		gdc.sendMsg(sSend);
 	}
 	
 	public void messageReceive(String s, GerantDeClient  gdc)
@@ -69,8 +69,9 @@ public class AcceptClient implements Runnable
 		if (name == null)
 			return true;
 		
+		
 		for (GerantDeClient gdc : listGerantClient)
-			if (gdc.getName().equals(name))
+			if (gdc.getName() != null && gdc.getName().equals(name))
 				return true;
 		
 		return false;
