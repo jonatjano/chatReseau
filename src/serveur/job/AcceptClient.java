@@ -4,6 +4,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import server.Server;
 import server.ihm.IHM;
+import server.job.Command;
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Runtime;
@@ -15,6 +16,10 @@ public class AcceptClient implements Runnable
 	public static final String RECEIVE_MESSAGE   = "NORMAL_MESSAGE";
 	public static final String DISCONNECT_CLIENT = "DISCONNECTED";
 	public static final String CONNECT_CLIENT = "CONNECTED";
+	public static final String NORMAL_COMMAND_TYPE = "NORMAL_COMMAND";
+	public static final String ERROR_COMMAND_TYPE = "ERROR_COMMAND";
+	
+	public static final String HELP_COMMAND = "HELP";
 	
 	private ServerSocket serverSock;
 	private Server serv;
@@ -25,6 +30,7 @@ public class AcceptClient implements Runnable
 	{
 		this.serverSock = serverSock;
 		this.serv = s;
+		Command.setAcceptClient(this);
 		this.listGerantClient = new ArrayList<GerantDeClient>();
 		this.listThreadGerantClient = new ArrayList<Thread>();
 	}
@@ -40,8 +46,31 @@ public class AcceptClient implements Runnable
 	
 	public void messageReceive(String s, GerantDeClient  gdc)
 	{
-		for ( GerantDeClient gdcTemp : listGerantClient)
-			this.sendInfo( gdcTemp, AcceptClient.RECEIVE_MESSAGE , gdc.getName() + ":" + s);
+		if (!s.startsWith("/"))
+			for ( GerantDeClient gdcTemp : listGerantClient)
+				this.sendInfo( gdcTemp, AcceptClient.RECEIVE_MESSAGE , gdc.getName() + ":" + s);
+		
+		if (s.length() <=  1)
+			return;
+		
+		CommandExec(s.substring(1), gdc);
+	}
+	
+	private void CommandExec(String commandString, GerantDeClient gdc)
+	{
+		if (commandString.length() <= 1)
+			return;
+		
+		String commandName = commandString;
+		int indSpace = commandString.indexOf(" ");
+		if (indSpace != -1)
+			commandName = commandString.substring(0,indSpace);
+		
+		Command command = Command.getCommand(commandName.toUpperCase());
+		if (command != null)
+			command.exec(gdc, commandString);
+		else
+			Command.error(gdc);
 	}
 	
 	public void connection(GerantDeClient gdc)

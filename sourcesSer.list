@@ -4,3 +4,4 @@ src/serveur/Server.java
 src/serveur/job/GerantDeClient.java
 src/serveur/job/AcceptClient.java
 src/serveur/job/Client.java
+src/serveur/job/Command.java
