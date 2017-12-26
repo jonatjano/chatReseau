@@ -7,6 +7,8 @@ import java.net.Socket;
 
 public class Client
 {
+	private static final String REG_NAME_CLIENT = "[a-zA-Z0-9]{4,}";
+	
 	private PrintWriter 	out;
 	private BufferedReader 	in;
 	
@@ -58,6 +60,9 @@ public class Client
 		if (this.name != null)
 			return false;
 		
+		if (!this.name.matches(Client.REG_NAME_CLIENT))
+			return false;
+	
 		this.name = name;
 		return true;
 	}
