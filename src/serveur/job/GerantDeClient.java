@@ -49,6 +49,7 @@ public class GerantDeClient implements Runnable
 			{
 				accClient.sendInfo(this, AcceptClient.NAME_REQUEST_CLIENT, null);
 				name = client.receiveMsg();
+				accClient.nameIsUsed(name);
 				
 			} while ( accClient.nameIsUsed(name)  || !client.setName(name));
 			
