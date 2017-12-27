@@ -1,5 +1,7 @@
 package client.ihm;
 
+import java.awt.Color;
+
 import client.Client;
 
 public abstract class IHM
@@ -16,7 +18,14 @@ public abstract class IHM
 		return false;
 	}
 
-	public abstract void printMessage(String message);
+	public void printMessage(String message)
+	{
+		printMessage(message, "");
+	}
+
+	public abstract void printMessage(String message, Color color);
+
+	public abstract void printMessage(String message, String style);
 
 	public abstract String askPseudo();
 }

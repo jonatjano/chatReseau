@@ -1,6 +1,7 @@
 package client.ihm;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
@@ -11,15 +12,22 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.JOptionPane;
 
 import client.Client;
+import client.job.MessageHandler;
+
+import javax.swing.text.StyleConstants;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.StyleContext;
+
 
 public class IHMSwing extends IHM implements KeyListener, ActionListener
 {
 	private JFrame frame;
-	private JTextArea recepField;
+	private JTextPane recepField;
 	private JTextField sendField;
 	private JButton sendButton;
 
@@ -30,7 +38,7 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		recepField = new JTextArea();
+		recepField = new JTextPane();
 		recepField.setEditable(false);
 		frame.add(recepField, BorderLayout.CENTER);
 
@@ -50,9 +58,24 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 		frame.setVisible(true);
 	}
 
-	public void printMessage(String message)
+	public void printMessage(String message, Color color)
 	{
-		recepField.append("\n" + message);
+		appendToPane(message, color);
+	}
+
+	public void printMessage(String message, String style)
+	{
+		switch (style)
+		{
+			case MessageHandler.NORMAL_COMMAND:
+				appendToPane(message, Color.BLUE);
+			break;
+			case MessageHandler.ERROR_COMMAND:
+				appendToPane(message, Color.RED);
+			break;
+			default:
+				appendToPane(message, Color.BLACK);
+		}
 	}
 
 	public String askPseudo()
@@ -68,6 +91,22 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 				);
 		} while ((s == null) || (s.length() == 0));
 		return s;
+	}
+
+	private void appendToPane(String msg, Color c)
+	{
+		StyleContext sc = StyleContext.getDefaultStyleContext();
+		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
+
+		// aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
+		// aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
+
+		int len = recepField.getDocument().getLength();
+		recepField.setEditable(true);
+		recepField.setCaretPosition(len);
+		recepField.setCharacterAttributes(aset, false);
+		recepField.replaceSelection("\n" + msg);
+		recepField.setEditable(false);
 	}
 
 	public void actionPerformed(ActionEvent e)
