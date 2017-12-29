@@ -37,7 +37,7 @@ public class IHMConsol extends IHM
 				System.out.println("--> connection : " + s);
 				break;
 
-			case IHM.QUIT_CLIENT_MESSAGE:
+			case IHM.LEAVE_CLIENT_MESSAGE:
 				System.out.println("--> déconnection : " + s);
 				break;
 

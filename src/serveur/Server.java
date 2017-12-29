@@ -90,7 +90,7 @@ public class Server
 		}
 		catch (Exception e)
 		{
-			System.out.println("La lecture du fichier de configuration à échoué");
+			//System.out.println("La lecture du fichier de configuration à échoué");
 		}
 	}
 
@@ -99,28 +99,35 @@ public class Server
 		readConfig("../config");
 
 		IHM ihm;
-		switch (config.get("defaultIHM"))
-		{
-			// case "Swing":
-			// 	ihm = new IHMSwing();
-			// break;
-			// case "javaFx":
-			// 	ihm = new IHMJavaFx();
-			// break;
-			case "CUI":
-			default:
-				ihm = new IHMConsol();
-		}
-
 		int port = Server.DEFAULT_PORT;
-
-		try {
-			port = Integer.parseInt(config.get("defaultPort"));
-		}
-		catch (Exception e)
+		
+		if (config.size() != 0)
 		{
-			ihm.pError(IHM.CONF_PORT_ERROR);
+			switch (config.get("defaultIHM"))
+			{
+				// case "Swing":
+				// 	ihm = new IHMSwing();
+				// break;
+				// case "javaFx":
+				// 	ihm = new IHMJavaFx();
+				// break;
+				case "CUI":
+				default:
+					ihm = new IHMConsol();
+			}
+
+			
+
+			try {
+				port = Integer.parseInt(config.get("defaultPort"));
+			}
+			catch (Exception e)
+			{
+				ihm.pError(IHM.CONF_PORT_ERROR);
+			}
 		}
+		else
+			ihm = new IHMConsol();
 
 		if (arg.length >= 1)
 		{

@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class Client
 {
-	private static final String REG_NAME_CLIENT = "[a-zA-Z0-9]{4,}";
+	private static final String REG_NAME_CLIENT = "[a-zA-Z0-9_-]{4,}";
 	
 	private PrintWriter 	out;
 	private BufferedReader 	in;

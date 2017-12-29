@@ -19,7 +19,8 @@ public class AcceptClient implements Runnable
 	public static final String NORMAL_COMMAND_TYPE = "NORMAL_COMMAND";
 	public static final String ERROR_COMMAND_TYPE = "ERROR_COMMAND";
 	
-	public static final String HELP_COMMAND = "HELP";
+	
+	public static final int WAITING_TIME_CONNECTION = 500;
 	
 	private ServerSocket serverSock;
 	private Server serv;
@@ -87,7 +88,7 @@ public class AcceptClient implements Runnable
 		if (name == null)
 			return;
 		
-		serv.getIHM().pMessage(IHM.QUIT_CLIENT_MESSAGE,name);
+		serv.getIHM().pMessage(IHM.LEAVE_CLIENT_MESSAGE,name);
 		
 		for ( GerantDeClient gdcTemp : listGerantClient)
 			this.sendInfo( gdcTemp, AcceptClient.DISCONNECT_CLIENT, name);
@@ -109,7 +110,6 @@ public class AcceptClient implements Runnable
 	public void remove(GerantDeClient  gdc)
 	{
 		int ind = listGerantClient.indexOf(gdc);
-		
 		
 		this.deconnection( this.listGerantClient.get(ind) );
 		
@@ -135,7 +135,7 @@ public class AcceptClient implements Runnable
 				listThreadGerantClient.add(tgdc);
 				
 				tgdc.start();
-				Thread.sleep(2000);
+				Thread.sleep(AcceptClient.WAITING_TIME_CONNECTION);
 			}
 			catch(Exception e)
 			{

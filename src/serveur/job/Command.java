@@ -5,18 +5,18 @@ import server.job.GerantDeClient;
 
 enum Command
 {
-	HELP("HELP", "commande qui donne de l'aide", "cette commande permet d'obtenir de l'aide\nsi ");
+	HELP("HELP", "commande qui donne de l'aide", "cette commande permet d'obtenir de l'aide");
 
 	private String name = "";
-	private String descCourt = "";
-	private String descLong = "";
+	private String shortDesc = "";
+	private String longDesc = "";
 	private static AcceptClient accCli;
 
-	private Command(String name, String descCourt, String descLong)
+	private Command(String name, String shortDesc, String longDesc)
 	{
 		this.name = name;
-		this.descCourt = descCourt;
-		this.descLong = descLong;
+		this.shortDesc = shortDesc;
+		this.longDesc = longDesc;
 	}
 
 
@@ -48,7 +48,7 @@ enum Command
 		String sSend = "Voici la liste des Commandes :";
 		
 		for (Command command : Command.values())
-			sSend += "\\n\\t" + command.name + " : " + command.descCourt + "";
+			sSend += "\\n\\t" + command.name + " : " + command.shortDesc + "";
 		
 		accCli.sendInfo(gdc, AcceptClient.NORMAL_COMMAND_TYPE, sSend);
 	}
