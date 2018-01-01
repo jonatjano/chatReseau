@@ -50,7 +50,5 @@ public class MessageHandler
 				this.client.getIhm().printMessage(messageBody.replaceAll("\\\\n","\n").replaceAll("\\\\t","\t"), ERROR_COMMAND);
 				break;
 		}
-
-		// this.client.getIhm().printMessage(message);
 	}
 }

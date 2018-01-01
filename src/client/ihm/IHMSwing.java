@@ -98,9 +98,6 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 		StyleContext sc = StyleContext.getDefaultStyleContext();
 		AttributeSet aset = sc.addAttribute(SimpleAttributeSet.EMPTY, StyleConstants.Foreground, c);
 
-		// aset = sc.addAttribute(aset, StyleConstants.FontFamily, "Lucida Console");
-		// aset = sc.addAttribute(aset, StyleConstants.Alignment, StyleConstants.ALIGN_JUSTIFIED);
-
 		int len = recepField.getDocument().getLength();
 		recepField.setEditable(true);
 		recepField.setCaretPosition(len);
