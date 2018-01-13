@@ -105,6 +105,7 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 		recepField.setCaretPosition(len);
 		recepField.setCharacterAttributes(aset, false);
 		recepField.replaceSelection("\n" + msg);
+		recepField.setCaretPosition(recepField.getDocument().getLength());
 		recepField.setEditable(false);
 	}
 
