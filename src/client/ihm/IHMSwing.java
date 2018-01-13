@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import client.Client;
 import client.job.MessageHandler;
@@ -40,7 +41,8 @@ public class IHMSwing extends IHM implements KeyListener, ActionListener
 
 		recepField = new JTextPane();
 		recepField.setEditable(false);
-		frame.add(recepField, BorderLayout.CENTER);
+		JScrollPane scrollPane = new JScrollPane(recepField);
+		frame.add(scrollPane, BorderLayout.CENTER);
 
 		JPanel botPanel = new JPanel(new BorderLayout());
 		{
